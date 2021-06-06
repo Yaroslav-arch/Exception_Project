@@ -5,9 +5,8 @@ import java.util.Scanner;
 
 public class Demo {
     public static String read(String path) {
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(path));
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             StringBuilder stringBuilder = new StringBuilder();
             String currentString;
 
@@ -19,17 +18,8 @@ public class Demo {
             return stringBuilder.toString();
         } catch (IOException e) {
             System.out.println("Can't read file");
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                System.out.println("Can't close reader");
-            }finally {
-                return "";
-            }
         }
+        return "";
     }
 
     public static void main(String[] args) {
