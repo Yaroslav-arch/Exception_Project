@@ -14,11 +14,11 @@ public class BadCodeWithMistakes {
         String age = scanner.next();
 
         System.out.println(convertAgeToInteger(age));
-        // здесь выдаст NumberFormatException если вместо возраста ввести не число(точнее в 33 строке)
 
-        Object obj = new java.util.Date();
-        Integer int1 = (Integer) obj; //тут специально создал эту строку чтобы вызвать исключение
+//        Object obj = new java.util.Date();
+//        Integer int1 = (Integer) obj; //тут специально создал эту строку чтобы вызвать исключение
         // здесь вылетит ClassCastException
+        // можно проверить через class instanceof
 
         String[] person = new String[3];
         person[0] = firstName;
@@ -27,21 +27,27 @@ public class BadCodeWithMistakes {
         printPerson(person);
 
         String[] notPerson = null;
-        printPerson(notPerson); //здесь будет NPE если исправить цикл
+        printPerson(notPerson);
 
     }
 
     public static int convertAgeToInteger(String age) {
-        //здесь надо проверить содержимое строки
-        int ageNumbers = Integer.parseInt(age);
-        return ageNumbers;
+
+        if (!age.equals("\\d+")) {
+            return -1;
+        } else {
+            int ageNumbers = Integer.parseInt(age);
+            return ageNumbers;
+        }
     }
 
     public static void printPerson(String[] array) {
-        //здесь следует сделать проверку входящего массива на null
-        for (int i = 0; i <= array.length; i++) { //здесь достаточно внимательно писать массив
-            //здесь будет ArrayIndexOutOfBoundsException
-            System.out.println(array[i]);
+        if (array == null) {
+            System.out.println("Array is null");
+        } else {
+            for (int i = 0; i < array.length; i++) {
+                System.out.println(array[i]);
+            }
         }
     }
 

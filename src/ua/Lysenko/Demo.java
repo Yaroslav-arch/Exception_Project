@@ -1,7 +1,8 @@
 package ua.Lysenko;
 
-import java.io.*;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Demo {
     public static String read(String path) {
